@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Run Artillery load test
           command: |
-            artillery run --output report.json artillerytest.yml
+            npx artillery run --output report.json artillerytest.yml
           no_output_timeout: 10m  # Set a timeout for the load test
 
       - store_artifacts:
@@ -25,7 +25,7 @@ jobs:
       - run:
           name: Generate HTML report
           command: |
-            artillery report report.json
+            npx artillery report report.json
 
       - store_artifacts:
           path: report.html  # Save the Artillery HTML report as an artifact
