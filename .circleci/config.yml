@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   loadtest:
     docker:
-      - image: cimg/node:18  # Use a Node.js 18 Docker image
+      - image: cimg/node:18.20.6  # Use a Node.js 18 Docker image
     steps:
       - checkout  # Check out the code from the repository
 
