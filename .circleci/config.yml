@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Run Artillery load test
           command: |
-            npx artillery run --output report.json artillerytest.yml
+            npx artillery run --output report.json artillerytest.yaml
           no_output_timeout: 10m  # Set a timeout for the load test
 
       - store_artifacts:
