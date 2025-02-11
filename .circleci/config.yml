@@ -1,0 +1,37 @@
+version: 2.1
+
+jobs:
+  loadtest:
+    docker:
+      - image: cimg/node:18  # Use a Node.js 18 Docker image
+    steps:
+      - checkout  # Check out the code from the repository
+
+      - run:
+          name: Install dependencies
+          command: |
+            npm install -g artillery 
+
+      - run:
+          name: Run Artillery load test
+          command: |
+            artillery run --output report.json artillerytest.yml
+          no_output_timeout: 10m  # Set a timeout for the load test
+
+      - store_artifacts:
+          path: report.json  # Save the Artillery report as an artifact
+          destination: report.json
+
+      - run:
+          name: Generate HTML report
+          command: |
+            artillery report report.json
+
+      - store_artifacts:
+          path: report.html  # Save the Artillery HTML report as an artifact
+          destination: report.html
+
+workflows:
+  loadtest-workflow:
+    jobs:
+      - loadtest
